@@ -2,11 +2,23 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import drinks from "./drinks/recipes.js";
+import drinksRouter from "./routes/api/drinksRouter.js";
 
 dotenv.config();
 
 const { DB_HOST } = process.env;
+
+const app = express();
+
+app.use(cors());
+
+app.use("/api/drinks", drinksRouter);
+
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Not found",
+  });
+});
 
 mongoose
   .connect(DB_HOST)
@@ -16,15 +28,3 @@ mongoose
     });
   })
   .catch((error) => console.log(error.message));
-
-const app = express();
-
-app.get("/drinks", (req, res) => {
-  res.json(drinks);
-});
-
-app.use((req, res) => {
-  res.status(404).json({
-    message: "Not found",
-  });
-});
