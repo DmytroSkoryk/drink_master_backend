@@ -1,26 +1,20 @@
-import { Schema, model } from "mongoose";
+import fs from "fs/promises";
+import path from "path";
 
-const drinkSchema = new Schema({
-  drink: String,
-  drinkAlternate: String,
-  tags: String,
-  video: String,
-  category: String,
-  IBA: String,
-  alcoholic: String,
-  glass: String,
-  description: String,
-  instructions: String,
-  instructionsES: String,
-  instructionsDE: String,
-  instructionsFR: String,
-  instructionsIT: String,
-  instructionsRU: String,
-  instructionsPL: String,
-  instructionsUK: String,
-  drinkThumb: String,
-});
+const filePath = path.resolve("drinks", "recipes.json");
 
-const Drink = model("drink", drinkSchema);
+const getAllDrinks = async () => {
+  const data = await fs.readFile(filePath);
+  return JSON.parse(data);
+};
 
-export default Drink;
+const getDrinksById = async (drinkId) => {
+  const drinks = await getAllDrinks();
+  const result = drinks.find((item) => item._id.$oid === drinkId);
+  return result || null;
+};
+
+export default {
+  getAllDrinks,
+  getDrinksById,
+};

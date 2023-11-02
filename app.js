@@ -1,15 +1,11 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
 import drinksRouter from "./routes/api/drinksRouter.js";
-
-dotenv.config();
-
-const { DB_HOST } = process.env;
+import logger from "morgan";
 
 const app = express();
-
+const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+app.use(logger(formatsLogger));
 app.use(cors());
 
 app.use("/api/drinks", drinksRouter);
@@ -20,11 +16,9 @@ app.use((req, res) => {
   });
 });
 
-mongoose
-  .connect(DB_HOST)
-  .then(() => {
-    app.listen(3000, () => {
-      console.log("Server ranning");
-    });
-  })
-  .catch((error) => console.log(error.message));
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
+});
+
+export default app;
