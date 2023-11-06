@@ -1,13 +1,6 @@
-import Drink from "../models/drinks.js";
-import Joi from "joi";
 import drinksServise from "../models/drinks.js";
 import { HttpError } from "../helpers/index.js";
 import { ctrlWrapper } from "../decorators/index.js";
-
-const drinkAddSchema = Joi.object({
-  drink: Joi.string().required(),
-  category: Joi.string().required(),
-});
 
 const getAll = async (req, res, next) => {
   const result = await drinksServise.getAllDrinks();
@@ -24,10 +17,6 @@ const getById = async (req, res, next) => {
 };
 
 const add = async (req, res, next) => {
-  const { error } = drinkAddSchema.validate(req.body);
-  if (error) {
-    throw HttpError(400, error.message);
-  }
   const result = await drinksServise.addDrink(req.body);
   res.status(201).json(result);
 };
