@@ -8,7 +8,7 @@ const drinksRouter = express.Router();
 
 drinksRouter.get("/", drinksController.getAll);
 
-drinksRouter.get("/:id", drinksController.getById);
+// drinksRouter.get("/:id", drinksController.getById);
 
 drinksRouter.post(
   "/",
@@ -17,6 +17,6 @@ drinksRouter.post(
   drinksController.add
 );
 
-drinksRouter.delete("/:id", drinksController.deleteById);
+// drinksRouter.delete("/:id", drinksController.deleteById);
 
 export default drinksRouter;
