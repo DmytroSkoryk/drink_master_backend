@@ -1,6 +1,4 @@
 import Drink from "../models/drink.js";
-
-import drinksServise from "../models/drinks.js";
 import { HttpError } from "../helpers/index.js";
 import { ctrlWrapper } from "../decorators/index.js";
 

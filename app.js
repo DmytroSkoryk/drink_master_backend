@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import drinksRouter from "./routes/api/drinksRouter.js";
+import authRouter from "./routes/api/authRouter.js";
 import logger from "morgan";
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/drinks", drinksRouter);
+app.use("/api/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({
