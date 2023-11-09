@@ -3,7 +3,8 @@ import { HttpError } from "../helpers/index.js";
 import { ctrlWrapper } from "../decorators/index.js";
 
 const getAll = async (req, res) => {
-  const result = await Drink.find();
+  const { _id: owner } = req.user;
+  const result = await Drink.find({ owner });
   res.json(result);
 };
 
@@ -17,7 +18,8 @@ const getById = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const result = await Drink.create(req.body);
+  const { _id: owner } = req.user;
+  const result = await Drink.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 

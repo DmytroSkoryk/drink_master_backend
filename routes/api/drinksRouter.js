@@ -1,10 +1,16 @@
 import express from "express";
 import drinksController from "../../controllers/drinksController.js";
 import { validateBody } from "../../decorators/index.js";
-import { isEmptyBody, isValidId } from "../../middlewares/index.js";
+import {
+  isEmptyBody,
+  isValidId,
+  authenticate,
+} from "../../middlewares/index.js";
 import drinksSchemas from "../../schemas/drinksSchemas.js";
 
 const drinksRouter = express.Router();
+
+drinksRouter.use(authenticate);
 
 drinksRouter.get("/", drinksController.getAll);
 
