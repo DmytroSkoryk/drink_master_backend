@@ -1,8 +1,6 @@
 {
   "name": "back-end-drink-master",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
   "type": "module",
   "engines": {
     "node": "^18.16.0"
