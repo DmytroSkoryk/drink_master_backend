@@ -3,6 +3,8 @@ import cors from "cors";
 import drinksRouter from "./routes/api/drinksRouter.js";
 import authRouter from "./routes/api/authRouter.js";
 import logger from "morgan";
+import swaggerUiExpress from "swagger-ui-express";
+import swaggerDocument from "./swagger.json" assert { type: "json" };
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -12,6 +14,11 @@ app.use(express.json());
 
 app.use("/api/drinks", drinksRouter);
 app.use("/api/auth", authRouter);
+app.use(
+  "/api-docs",
+  swaggerUiExpress.serve,
+  swaggerUiExpress.setup(swaggerDocument)
+);
 
 app.use((req, res) => {
   res.status(404).json({
