@@ -44,7 +44,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponce"
+                  "$ref": "#/components/schemas/RegistrationResponse"
                 }
               }
             }
