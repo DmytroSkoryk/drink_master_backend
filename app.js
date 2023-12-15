@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/drinks", drinksRouter);
 app.use("/api/auth", authRouter);
 app.use(
-  "/api-docs",
+  "/api/docs",
   swaggerUiExpress.serve,
   swaggerUiExpress.setup(swaggerDocument)
 );

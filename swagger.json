@@ -269,11 +269,16 @@
                 "type": "string",
                 "description": "User's email",
                 "format": "email"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar"
               }
             },
             "example": {
               "name": "Alex",
-              "email": "user@example.com"
+              "email": "user@example.com",
+              "avatarURL": "https://example.com/avatar.jpg"
             }
           }
         }
