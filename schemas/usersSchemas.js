@@ -11,7 +11,12 @@ const userSigninSchema = Joi.object({
   password: Joi.string().pattern(passwordRegexp).required(),
 });
 
+const updateUserSchema = Joi.object({
+  name: Joi.string().required(),
+});
+
 export default {
   userSignupSchema,
   userSigninSchema,
+  updateUserSchema,
 };

@@ -161,6 +161,39 @@
           }
         }
       }
+    },
+
+    "/auth/update": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Update user's data",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
     }
   },
 
@@ -278,6 +311,29 @@
             "example": {
               "name": "Alex",
               "email": "user@example.com",
+              "avatarURL": "https://example.com/avatar.jpg"
+            }
+          }
+        }
+      },
+
+      "UpdateResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar"
+              }
+            },
+            "example": {
+              "name": "username or upload-username",
               "avatarURL": "https://example.com/avatar.jpg"
             }
           }
