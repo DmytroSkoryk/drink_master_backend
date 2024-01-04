@@ -8,7 +8,7 @@ const authRouter = express.Router();
 
 authRouter.post(
   "/signup",
-  upload.single("avatarURL"),
+
   validateBody(usersSchemas.userSignupSchema),
   authController.signup
 );
@@ -25,6 +25,7 @@ authRouter.post("/signout", authenticate, authController.signout);
 
 authRouter.patch(
   "/update",
+  upload.single("avatarURL"),
   authenticate,
   validateBody(usersSchemas.updateUserSchema),
   authController.updateUser

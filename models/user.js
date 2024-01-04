@@ -30,9 +30,9 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-userSchema.pre("findOneAndApdate", handleUpdateValidate);
+userSchema.pre("findOneAndUpdate", handleUpdateValidate);
 userSchema.post("save", handleSaveError);
-userSchema.post("findOneAndApdate", handleSaveError);
+userSchema.post("findOneAndUpdate", handleSaveError);
 
 const User = model("user", userSchema);
 export default User;
