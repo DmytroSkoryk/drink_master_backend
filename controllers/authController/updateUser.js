@@ -1,19 +1,18 @@
 import User from "../../models/user.js";
 import fs from "fs/promises";
 import path from "path";
+import { HttpError, cloudinary } from "../../helpers/index.js";
 
 const userPath = path.resolve("public", "users");
 
 const updateUser = async (req, res) => {
   const { name } = req.body;
   const { _id } = req.user;
-
-  const { path: oldPath, filename } = req.file;
-  const newPath = path.join(userPath, filename);
-  await fs.rename(oldPath, newPath);
-  const avatar = path.join("users", filename);
-  console.log(avatar);
-
+  const { path: oldPath } = req.file;
+  const { url: avatar } = await cloudinary.uploader.upload(oldPath, {
+    folder: "avatars",
+  });
+  await fs.unlink(oldPath);
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     { name, avatarURL: avatar },
